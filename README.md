@@ -1,9 +1,9 @@
-# eurekaclinical-service-registry-service
+# Eureka! Clinical Registry Service
 [Atlanta Clinical and Translational Science Institute (ACTSI)](http://www.actsi.org), [Emory University](http://www.emory.edu), Atlanta, GA
 
 Write a description here
 
-Latest release: [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-service-registry-service/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-service-registry-service)
+Latest release: [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-registry-service/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-registry-service)
 
 No final releases yet
 
@@ -63,7 +63,7 @@ Returns a specified Role object by its name, which is unique.
 
 The project uses the maven build tool. Typically, you build it by invoking `mvn clean install` at the command line. For simple file changes, not additions or deletions, you can usually use `mvn install`. See https://github.com/eurekaclinical/dev-wiki/wiki/Building-Eureka!-Clinical-projects for more details.
 
-You can run this project in an embedded tomcat by executing `mvn tomcat7:run -Ptomcat` after you have built it. It will be accessible in your web browser at https://localhost:8443/eurekaclinical-service-registry-service/. Your username will be `superuser`.
+You can run this project in an embedded tomcat by executing `mvn tomcat7:run -Ptomcat` after you have built it. It will be accessible in your web browser at https://localhost:8443/eurekaclinical-registry-service/. Your username will be `superuser`.
 
 A [Liquibase](http://www.liquibase.org) changelog is provided in `src/main/resources/dbmigration/` for creating the schema and objects. [Liquibase 3.3 or greater](http://www.liquibase.org/download/index.html) is required.
 
@@ -74,7 +74,7 @@ Perform the following steps:
 ```
 ./liquibase \
       --driver=JDBC_DRIVER_CLASS_NAME \
-      --classpath=/path/to/jdbcdriver.jar:/path/to/eurekaclinical-service-registry-service.war \
+      --classpath=/path/to/jdbcdriver.jar:/path/to/eurekaclinical-registry-service.war \
       --changeLogFile=dbmigration/changelog-master.xml \
       --url="JDBC_CONNECTION_URL" \
       --username=DB_USER \
@@ -100,27 +100,27 @@ Perform the following steps:
 The validation query above is suitable for PostgreSQL. For Oracle and H2, use
 `SELECT 1 FROM DUAL`.
 
-This service is configured using a properties file located at `/etc/ec-service-registry/application.properties`. It supports the following properties:
+This service is configured using a properties file located at `/etc/ec-registry/application.properties`. It supports the following properties:
 * `eurekaclinical.serviceregistry.callbackserver`: https://hostname:port
-* `eurekaclinical.serviceregistry.url`: https://hostname:port/eurekaclinical-service-registry-service
+* `eurekaclinical.serviceregistry.url`: https://hostname:port/eurekaclinical-registry-service
 * `cas.url`: https://hostname.of.casserver:port/cas-server
 
 A Tomcat restart is required to detect any changes to the configuration file.
 
 1) Stop Tomcat.
 2) Remove any old copies of the unpacked war from Tomcat's webapps directory.
-3) Copy the warfile into the tomcat webapps directory, renaming it to remove the version. For example, rename `eurekaclinical-service-registry-service-1.0-SNAPSHOT.war` to `eurekaclinical-service-registry-service.war`.
+3) Copy the warfile into the tomcat webapps directory, renaming it to remove the version. For example, rename `eurekaclinical-registry-service-1.0-SNAPSHOT.war` to `eurekaclinical-registry-service.war`.
 4) Start Tomcat.
 
 ```
 <dependency>
     <groupId>org.eurekaclinical</groupId>
-    <artifactId>eurekaclinical-service-registry-service</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>eurekaclinical-registry-service</artifactId>
+    <version>1.0-Alpha-1</version>
 </dependency>
 ```
 
-* [Javadoc for latest development release](http://javadoc.io/doc/org.eurekaclinical/eurekaclinical-service-registry-service) [![Javadocs](http://javadoc.io/badge/org.eurekaclinical/eurekaclinical-service-registry-service.svg)](http://javadoc.io/doc/org.eurekaclinical/eurekaclinical-service-registry-service)
+* [Javadoc for latest development release](http://javadoc.io/doc/org.eurekaclinical/eurekaclinical-registry-service) [![Javadocs](http://javadoc.io/badge/org.eurekaclinical/eurekaclinical-registry-service.svg)](http://javadoc.io/doc/org.eurekaclinical/eurekaclinical-registry-service)
 
 Feel free to contact us at help@eurekaclinical.org.
 
