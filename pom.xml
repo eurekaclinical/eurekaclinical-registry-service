@@ -12,18 +12,18 @@
         <artifactId>eurekaclinical-parent-standard-deps</artifactId>
         <version>2-Beta-4</version>
     </parent>
-    <url>https://github.com/eurekaclinical/eurekaclinical-service-registry-service.git</url>
+    <url>https://github.com/eurekaclinical/eurekaclinical-registry-service.git</url>
 
     <scm>
-        <connection>scm:git:https://github.com/eurekaclinical/eurekaclinical-service-registry-service.git</connection>
-        <developerConnection>scm:git:https://github.com/eurekaclinical/eurekaclinical-service-registry-service.git</developerConnection>
-        <url>https://github.com/eurekaclinical/eurekaclinical-service-registry-service.git</url>
+        <connection>scm:git:https://github.com/eurekaclinical/eurekaclinical-registry-service.git</connection>
+        <developerConnection>scm:git:https://github.com/eurekaclinical/eurekaclinical-registry-service.git</developerConnection>
+        <url>https://github.com/eurekaclinical/eurekaclinical-registry-service.git</url>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/eurekaclinical/eurekaclinical-service-registry-service/issues</url>
+        <url>https://github.com/eurekaclinical/eurekaclinical-registry-service/issues</url>
     </issueManagement>
 
     <properties>
