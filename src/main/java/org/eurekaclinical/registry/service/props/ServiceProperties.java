@@ -28,7 +28,7 @@ import org.eurekaclinical.standardapis.props.CasJerseyEurekaClinicalProperties;
 public class ServiceProperties extends CasJerseyEurekaClinicalProperties {
 
     public ServiceProperties() {
-        super("/etc/ec-service-registry");
+        super("/etc/ec-registry");
     }
 
     @Override
