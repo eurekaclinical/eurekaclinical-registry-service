@@ -119,6 +119,11 @@
         </insert>
         <insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
+            <column name="NAME" value="REDIRECTWEBCLIENT"/>
+            <column name="DESCRIPTION" value="Web client that is only accessed via a redirect"/>
+        </insert>
+        <insert tableName="COMPONENT_TYPES">
+            <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
             <column name="NAME" value="APIGATEWAY"/>
             <column name="DESCRIPTION" value="API gateway"/>
         </insert>
@@ -131,6 +136,11 @@
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
             <column name="NAME" value="WEBAPP"/>
             <column name="DESCRIPTION" value="Web application"/>
+        </insert>
+        <insert tableName="COMPONENT_TYPES">
+            <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
+            <column name="NAME" value="REDIRECTWEBAPP"/>
+            <column name="DESCRIPTION" value="Web application that is only accessed via a redirect"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
