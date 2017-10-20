@@ -134,8 +134,8 @@
         </insert>
         <insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
-            <column name="NAME" value="EXTERNALWEBAPP"/>
-            <column name="DESCRIPTION" value="External web application"/>
+            <column name="NAME" value="EXTERNAL"/>
+            <column name="DESCRIPTION" value="External web site"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
