@@ -20,13 +20,27 @@ package org.eurekaclinical.registry.service.dao;
  * #L%
  */
 
+import java.util.List;
 import org.eurekaclinical.registry.service.entity.ComponentEntity;
 import org.eurekaclinical.standardapis.dao.DaoWithUniqueName;
 
 /**
  *
  * @author Andrew Post
+ * @param <E> a component entity.
  */
 public interface ComponentDao<E extends ComponentEntity> extends DaoWithUniqueName<E, Long> {
+
+    /**
+     * Filter components by OR'd types.
+     * 
+     * @param types one or more component type names. Cannot be 
+     * <code>null</code>. If you specify zero component type names, this method
+     * will return an empty list.
+     * 
+     * @return the components with the specified types. Guaranteed not 
+     * <code>null</code>.
+     */
+    List<ComponentEntity> getByType(String... types);
     
 }

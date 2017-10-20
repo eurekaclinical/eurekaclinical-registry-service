@@ -19,28 +19,60 @@ package org.eurekaclinical.registry.service.dao;
  * limitations under the License.
  * #L%
  */
-
+import java.util.Arrays;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Root;
 import org.eurekaclinical.registry.service.entity.ComponentEntity;
 import org.eurekaclinical.registry.service.entity.ComponentEntity_;
+import org.eurekaclinical.registry.service.entity.ComponentTypeEntity_;
 import org.eurekaclinical.standardapis.dao.GenericDao;
+import org.eurekaclinical.standardapis.dao.QueryPathProvider;
 
 /**
- *
+ * Data access object for registry components.
+ * 
  * @author Andrew Post
  */
-public class JpaComponentDao extends GenericDao<ComponentEntity, Long> implements ComponentDao<ComponentEntity> {
+public class JpaComponentDao extends GenericDao<ComponentEntity, Long> 
+        implements ComponentDao<ComponentEntity> {
 
     @Inject
     protected JpaComponentDao(Provider<EntityManager> inManagerProvider) {
         super(ComponentEntity.class, inManagerProvider);
     }
 
+    /**
+     * Gets the component with the given name.
+     * 
+     * @param name the name. Cannot be <code>null</code>.
+     * @return the matching component, or <code>null</code> if there is none.
+     */
     @Override
     public ComponentEntity getByName(String name) {
-        return this.getUniqueByAttribute(ComponentEntity_.name, name);
+        return getUniqueByAttribute(ComponentEntity_.name, name);
     }
+
+    /**
+     * Gets all components with any of the given component types.
+     * 
+     * @param types the component types.
+     * @return the matching components. Guaranteed not <code>null</code>.
+     */
+    @Override
+    public List<ComponentEntity> getByType(String... types) {
+        return getListByAttributeIn(COMPONENT_TYPE_PATH_PROVIDER, 
+                Arrays.asList(types));
+    }
+
+    /**
+     * Provides a criteria query path from a component to its component type.
+     */
+    private static final QueryPathProvider<ComponentEntity, String> COMPONENT_TYPE_PATH_PROVIDER = 
+            (Root<ComponentEntity> root, CriteriaBuilder builder) -> 
+                    root.get(ComponentEntity_.type).get(ComponentTypeEntity_.name);
 
 }
