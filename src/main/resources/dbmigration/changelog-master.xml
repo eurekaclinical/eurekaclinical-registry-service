@@ -114,33 +114,28 @@
     <changeSet author="arpost" id="5">
         <insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
-            <column name="NAME" value="WEBCLIENT"/>
-            <column name="DESCRIPTION" value="Web client"/>
-        </insert>
-        <insert tableName="COMPONENT_TYPES">
-            <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
-            <column name="NAME" value="REDIRECTWEBCLIENT"/>
-            <column name="DESCRIPTION" value="Web client that is only accessed via a redirect"/>
-        </insert>
-        <insert tableName="COMPONENT_TYPES">
-            <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
             <column name="NAME" value="APIGATEWAY"/>
             <column name="DESCRIPTION" value="API gateway"/>
         </insert>
         <insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
             <column name="NAME" value="SERVICE"/>
-            <column name="DESCRIPTION" value="Service"/>
+            <column name="DESCRIPTION" value="Eureka! Clinical service"/>
         </insert>
 	<insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
             <column name="NAME" value="WEBAPP"/>
-            <column name="DESCRIPTION" value="Web application"/>
+            <column name="DESCRIPTION" value="Eureka! Clinical web application"/>
         </insert>
         <insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
-            <column name="NAME" value="REDIRECTWEBAPP"/>
-            <column name="DESCRIPTION" value="Web application that is only accessed via a redirect"/>
+            <column name="NAME" value="WEBPAGE"/>
+            <column name="DESCRIPTION" value="Web page that extends the functionality of a web application"/>
+        </insert>
+        <insert tableName="COMPONENT_TYPES">
+            <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
+            <column name="NAME" value="EXTERNALWEBAPP"/>
+            <column name="DESCRIPTION" value="External web application"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
