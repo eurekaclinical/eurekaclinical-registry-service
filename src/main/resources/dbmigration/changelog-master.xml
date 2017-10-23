@@ -100,6 +100,9 @@
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="COMPONENTS_NAME_UNIQ"/>
             </column>
+            <column name="DISPLAYNAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="DESCRIPTION" type="VARCHAR(255)"/>
             <column name="URL" type="VARCHAR(255)">
                 <constraints nullable="false"/>
