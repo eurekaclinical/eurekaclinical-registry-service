@@ -36,7 +36,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "components")
-public class ComponentEntity implements org.eurekaclinical.standardapis.entity.Entity {
+public class ComponentEntity implements org.eurekaclinical.standardapis.entity.Entity<Long> {
     @Id
     @SequenceGenerator(name = "COMP_TYPE_SEQ_GENERATOR", sequenceName = "COMP_TYPE_SEQ",
             allocationSize = 1)
