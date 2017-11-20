@@ -123,12 +123,12 @@
         <insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
             <column name="NAME" value="SERVICE"/>
-            <column name="DESCRIPTION" value="Eureka! Clinical service"/>
+            <column name="DESCRIPTION" value="Service"/>
         </insert>
 	<insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
             <column name="NAME" value="WEBAPP"/>
-            <column name="DESCRIPTION" value="Eureka! Clinical web application"/>
+            <column name="DESCRIPTION" value="Web application"/>
         </insert>
         <insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
