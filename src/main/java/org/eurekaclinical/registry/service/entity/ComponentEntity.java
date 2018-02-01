@@ -50,6 +50,8 @@ public class ComponentEntity implements org.eurekaclinical.standardapis.entity.E
     private String displayName;
     
     private String description;
+
+    private String icon;
     
     @Column(nullable = false)
     private String url;
@@ -57,6 +59,7 @@ public class ComponentEntity implements org.eurekaclinical.standardapis.entity.E
     @ManyToOne
     @JoinColumn(referencedColumnName = "id", nullable = false)
     private ComponentTypeEntity type;
+
 
     @Override
     public Long getId() {
@@ -106,6 +109,14 @@ public class ComponentEntity implements org.eurekaclinical.standardapis.entity.E
 
     public void setType(ComponentTypeEntity type) {
         this.type = type;
+    }
+    
+    public String getIcon(){
+        return icon;
+    }
+    
+    public void setIcon(String icon){
+        this.icon = icon;
     }
     
 }

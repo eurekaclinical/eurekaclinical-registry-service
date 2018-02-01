@@ -137,6 +137,7 @@ public class ComponentResource extends AbstractNamedReadWriteResource<ComponentE
         comm.setDescription(entity.getDescription());
         comm.setUrl(entity.getUrl());
         comm.setType(entity.getType().getId());
+        comm.setIcon(entity.getIcon());
         return comm;
     }
 
