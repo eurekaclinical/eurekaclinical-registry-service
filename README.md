@@ -1,11 +1,24 @@
 # Eureka! Clinical Registry Service
 [Atlanta Clinical and Translational Science Institute (ACTSI)](http://www.actsi.org), [Emory University](http://www.emory.edu), Atlanta, GA
 
-Write a description here
+The registry service provides a list of deployed Eureka! Clinical components. 
+Its initial purpose is for resource discovery such as populating menus and other lists of
+available components.
 
+## Version history
 Latest release: [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-registry-service/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-registry-service)
 
-No final releases yet
+### Version 1.1
+The properties in the application.properties were named in a non-standard way in version 1.0,
+starting with eurekaclinical.registry.service rather than eurekaclinical.registryservice.
+Version 1.1 added standard property names. It responds to either, and it prioritizes the original
+non-standard names if both are present. The non-standard property names are deprecated and will be 
+removed in a future release.
+
+We also updated the README.md.
+
+### Version 1.0
+Initial release.
 
 * [Oracle Java JDK 8](http://www.oracle.com/technetwork/java/javase/overview/index.html)
 * [Maven 3.2.5 or greater](https://maven.apache.org)
@@ -101,9 +114,16 @@ The validation query above is suitable for PostgreSQL. For Oracle and H2, use
 `SELECT 1 FROM DUAL`.
 
 This service is configured using a properties file located at `/etc/ec-registry/application.properties`. It supports the following properties:
-* `eurekaclinical.serviceregistry.callbackserver`: https://hostname:port
-* `eurekaclinical.serviceregistry.url`: https://hostname:port/eurekaclinical-registry-service
+* `eurekaclinical.domain.url`: https://hostname:port
+* `eurekaclinical.registryservice.callbackserver`: https://hostname:port
+* `eurekaclinical.registryservice.url`: https://hostname:port/eurekaclinical-registry-service
 * `cas.url`: https://hostname.of.casserver:port/cas-server
+
+It also supports the following deprecated properties:
+* `eurekaclinical.registry.service.callbackserver`: replaced by `eurekaclinical.registryservice.callbackserver`
+* `eurekaclinical.registry.service.url`: replaced by `eurekaclinical.registryservice.url`
+
+These deprecated properties will be removed in a future release.
 
 A Tomcat restart is required to detect any changes to the configuration file.
 
@@ -116,7 +136,7 @@ A Tomcat restart is required to detect any changes to the configuration file.
 <dependency>
     <groupId>org.eurekaclinical</groupId>
     <artifactId>eurekaclinical-registry-service</artifactId>
-    <version>1.0-Alpha-1</version>
+    <version>version</version>
 </dependency>
 ```
 

@@ -31,6 +31,6 @@ public class ServletModule extends AbstractAuthorizingJerseyServletModuleWithPer
     private static final String PACKAGE_NAMES = "org.eurekaclinical.registry.service.resource";
 
     public ServletModule(ServiceProperties inProperties) {
-        super(inProperties, PACKAGE_NAMES);
+        super(inProperties, PACKAGE_NAMES, false);
     }
 }
