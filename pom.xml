@@ -29,7 +29,7 @@
     <properties>
         <eurekaclinical-common-version>2.0</eurekaclinical-common-version>
         <eurekaclinical-standard-apis-version>2.0</eurekaclinical-standard-apis-version>
-        <eurekaclinical-registry-client-version>1.0</eurekaclinical-registry-client-version>
+        <eurekaclinical-registry-client-version>1.1-Beta-1</eurekaclinical-registry-client-version>
     </properties>
     <build>
         <plugins>
