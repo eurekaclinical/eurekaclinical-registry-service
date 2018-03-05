@@ -23,7 +23,7 @@ package org.eurekaclinical.registry.service.props;
 import org.eurekaclinical.standardapis.props.CasJerseyEurekaClinicalProperties;
 
 /**
- * Created by akalsan on 10/4/16.
+ * @author Andrew Post
  */
 public class ServiceProperties extends CasJerseyEurekaClinicalProperties {
 
@@ -33,12 +33,22 @@ public class ServiceProperties extends CasJerseyEurekaClinicalProperties {
 
     @Override
     public String getProxyCallbackServer() {
-        return getValue("eurekaclinical.registry.service.callbackserver");
+        String result = getValue("eurekaclinical.registry.service.callbackserver");
+        if (result != null) {
+            return result;
+        } else {
+            return getValue("eurekaclinical.registryservice.callbackserver");
+        }
     }
 
     @Override
     public String getUrl() {
-        return getValue("eurekaclinical.registry.service.url");
+        String result = getValue("eurekaclinical.registry.service.url");
+        if (result != null) {
+            return result;
+        } else {
+            return getValue("eurekaclinical.registryservice.url");
+        }
     }
 
 }
