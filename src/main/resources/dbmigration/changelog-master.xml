@@ -143,7 +143,7 @@
     </changeSet>
     <changeSet author="mai" id="6">
         <addColumn tableName="COMPONENTS">
-            <column name="icon" type="VARCHAR(1024)"/>
+            <column name="ICON" type="VARCHAR(1024)"/>
         </addColumn>
     </changeSet>
 </databaseChangeLog>
