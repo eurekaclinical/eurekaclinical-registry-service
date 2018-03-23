@@ -103,6 +103,9 @@ public class ComponentResource extends AbstractNamedReadWriteResource<ComponentE
         entity.setDescription(commObj.getDescription());
         entity.setUrl(commObj.getUrl());
         entity.setType(this.componentTypeDao.retrieve(commObj.getId()));
+        entity.setSmallIcon(commObj.getSmallIcon());
+        entity.setMediumIcon(commObj.getMediumIcon());
+        entity.setLargeIcon(commObj.getLargeIcon());
         return entity;
     }
 
@@ -137,7 +140,9 @@ public class ComponentResource extends AbstractNamedReadWriteResource<ComponentE
         comm.setDescription(entity.getDescription());
         comm.setUrl(entity.getUrl());
         comm.setType(entity.getType().getId());
-        comm.setIcon(entity.getIcon());
+        comm.setSmallIcon(entity.getSmallIcon()); 
+        comm.setMediumIcon(entity.getMediumIcon()); 
+        comm.setLargeIcon(entity.getLargeIcon()); 
         return comm;
     }
 

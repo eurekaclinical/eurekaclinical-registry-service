@@ -51,7 +51,9 @@ public class ComponentEntity implements org.eurekaclinical.standardapis.entity.E
     
     private String description;
 
-    private String icon;
+    private String smallIcon;
+    private String mediumIcon;
+    private String largeIcon;
     
     @Column(nullable = false)
     private String url;
@@ -111,12 +113,28 @@ public class ComponentEntity implements org.eurekaclinical.standardapis.entity.E
         this.type = type;
     }
     
-    public String getIcon(){
-        return icon;
+    public String getSmallIcon(){
+        return smallIcon;
     }
     
-    public void setIcon(String icon){
-        this.icon = icon;
+    public void setSmallIcon(String icon){
+        this.smallIcon = icon;
+    }
+    
+    public String getMediumIcon(){
+        return mediumIcon;
+    }
+    
+    public void setMediumIcon(String icon){
+        this.mediumIcon = icon;
+    }
+    
+    public String getLargeIcon(){
+        return largeIcon;
+    }
+    
+    public void setLargeIcon(String icon){
+        this.largeIcon = icon;
     }
     
 }
