@@ -143,7 +143,13 @@
     </changeSet>
     <changeSet author="mai" id="6">
         <addColumn tableName="COMPONENTS">
-            <column name="ICON" type="VARCHAR(1024)"/>
+            <column name="SMALLICON" type="VARCHAR(1024)"/>
+        </addColumn>
+        <addColumn tableName="COMPONENTS">
+            <column name="MEDIUMICON" type="VARCHAR(1024)"/>
+        </addColumn>
+        <addColumn tableName="COMPONENTS">
+            <column name="LARGEICON" type="VARCHAR(1024)"/>
         </addColumn>
     </changeSet>
 </databaseChangeLog>
