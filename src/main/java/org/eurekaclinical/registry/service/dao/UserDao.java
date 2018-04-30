@@ -20,29 +20,14 @@ package org.eurekaclinical.registry.service.dao;
  * #L%
  */
 
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.persistence.EntityManager;
-import org.eurekaclinical.registry.service.entity.GroupEntity;
-import org.eurekaclinical.standardapis.dao.AbstractJpaGroupDao;
+import java.util.List;
 
+import org.eurekaclinical.registry.service.entity.UserEntity;
+import org.eurekaclinical.standardapis.dao.Dao;
 
-/**
- * 
- *
- * @author Dileep
- */
-public class JpaGroupDao extends AbstractJpaGroupDao<GroupEntity> {
+public interface UserDao <U extends UserEntity> extends Dao<U, Long> {
 
-    /**
-     * Create an object with the give entity manager.
-     *
-     * @param inEMProvider The entity manager to be used for communication with
-     * the data store.
-     */
-    @Inject
-    public JpaGroupDao(final Provider<EntityManager> inEMProvider) {
-        super(GroupEntity.class, inEMProvider);
-    }
-
+    U getUsersByName(String name);
+	
+	List<U> getUsersForGroup(String username);
 }
