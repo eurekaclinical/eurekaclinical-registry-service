@@ -1,5 +1,5 @@
 # Eureka! Clinical Registry Service
-[Atlanta Clinical and Translational Science Institute (ACTSI)](http://www.actsi.org), [Emory University](http://www.emory.edu), Atlanta, GA
+[Georgia Clinical and Translational Science Alliance (Georgia CTSA)](http://www.georgiactsa.org), [Emory University](http://www.emory.edu), Atlanta, GA
 
 The registry service provides a list of deployed Eureka! Clinical components. 
 Its initial purpose is for resource discovery such as populating menus and other lists of
