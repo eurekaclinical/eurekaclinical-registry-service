@@ -72,11 +72,8 @@ Creates a new user. The User object is passed in as the body of the request. Ret
 ##### PUT `/api/protected/users/{id}`
 Updates the user object with the specified id. The User object is passed in as the body of the request. Requires the `admin` role.
 
-### `/api/protected/roles`
-Manages roles for this service. It is read-only.
-
 #### Role-based authorization
-No.
+Call-dependent.
 
 #### Requires successful authentication
 Yes
@@ -97,6 +94,77 @@ Returns a specified Role object by the value of its id property, which is unique
 
 ##### GET `/api/protected/roles/byname/{name}`
 Returns a specified Role object by its name, which is unique.
+
+#### Role-based authorization
+No.
+
+#### Requires successful authentication
+Yes
+
+#### ComponentType object
+The different kinds of Eureka! Clinical components. These include API gateways,
+services, and webclients. External websites also are a type of component.
+
+Properties:
+* `id`: unique number identifying the component type.
+* `name`: the component type's name string.
+* `description': description of the component type.
+
+#### Calls
+All calls use standard names, return values and status codes as specified in the [Eureka! Clinical microservice specification](https://github.com/eurekaclinical/dev-wiki/wiki/Eureka%21-Clinical-microservice-specification)
+
+#### GET `/api/protected/componenttypes`
+Returns an array of all ComponentType objects.
+
+##### GET `/api/protected/componenttypes/{id}`
+Returns a specified ComponentType object by the value of its id property, which is unique.
+
+##### GET `/api/protected/componenttypes/byname/{name}`
+Returns a specified ComponentType object by its name, which is unique.
+
+#### Role-based authorization
+No.
+
+#### Requires successful authentication
+Yes
+
+#### Component object
+An Eureka! Clinical API gateway, service, webclient, or other web application.
+
+Properties:
+* `id`: unique number identifying the component type.
+* `name`: the component type's name string.
+* `displayName`: the name to use in web clients (optional).
+* `description`: a brief description of the component (optional).
+* `url`: the component's base URL.
+* `type`: the component's type represented as the unique id of a ComponentType.
+* `smallIcon`: a small icon to represent this component in web clients (optional).
+* `mediumIcon`: a medium-sized icon to represent this component in web clients (optional).
+* `largeIcon`: a large icon to represent this component in web clients (optional).
+
+#### Calls
+All calls use standard names, return values and status codes as specified in the [Eureka! Clinical microservice specification](https://github.com/eurekaclinical/dev-wiki/wiki/Eureka%21-Clinical-microservice-specification)
+
+#### GET `/api/protected/components`
+Returns an array of all Component objects.
+
+##### GET `/api/protected/components/{id}`
+Returns a specified Component object by the value of its id property, which is unique.
+
+##### GET `/api/protected/components/byname/{name}`
+Returns a specified Component object by its name, which is unique.
+
+##### POST `/api/protected/components/`
+Registers a new Component. The Component object is passed in as the body of the request. Returns the URI of the created Component object. Requires the `admin` role.
+
+##### PUT `/api/protected/components/{id}`
+Updates the Component object with the specified id. The Component object is passed in as the body of the request. Requires the `admin` role.
+
+#### Role-based authorization
+Call-dependent.
+
+#### Requires successful authentication
+Yes
 
 ## Building it
 The project uses the maven build tool. Typically, you build it by invoking `mvn clean install` at the command line. For simple file changes, not additions or deletions, you can usually use `mvn install`. See https://github.com/eurekaclinical/dev-wiki/wiki/Building-Eureka!-Clinical-projects for more details.
