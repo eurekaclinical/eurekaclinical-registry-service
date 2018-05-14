@@ -72,8 +72,11 @@ Creates a new user. The User object is passed in as the body of the request. Ret
 ##### PUT `/api/protected/users/{id}`
 Updates the user object with the specified id. The User object is passed in as the body of the request. Requires the `admin` role.
 
+### `/api/protected/roles`
+Manages roles for this service. It is read-only.
+
 #### Role-based authorization
-Call-dependent.
+No
 
 #### Requires successful authentication
 Yes
@@ -95,6 +98,10 @@ Returns a specified Role object by the value of its id property, which is unique
 ##### GET `/api/protected/roles/byname/{name}`
 Returns a specified Role object by its name, which is unique.
 
+### `/api/protected/componenttypes`
+The different kinds of Eureka! Clinical components. These include API gateways,
+services, and webclients. External websites also are a type of component.
+
 #### Role-based authorization
 No.
 
@@ -102,8 +109,6 @@ No.
 Yes
 
 #### ComponentType object
-The different kinds of Eureka! Clinical components. These include API gateways,
-services, and webclients. External websites also are a type of component.
 
 Properties:
 * `id`: unique number identifying the component type.
@@ -122,15 +127,16 @@ Returns a specified ComponentType object by the value of its id property, which 
 ##### GET `/api/protected/componenttypes/byname/{name}`
 Returns a specified ComponentType object by its name, which is unique.
 
+### `/api/protected/components`
+An Eureka! Clinical API gateway, service, webclient, or other web application.
+
 #### Role-based authorization
-No.
+Call-dependent
 
 #### Requires successful authentication
 Yes
 
 #### Component object
-An Eureka! Clinical API gateway, service, webclient, or other web application.
-
 Properties:
 * `id`: unique number identifying the component type.
 * `name`: the component type's name string.
@@ -159,12 +165,6 @@ Registers a new Component. The Component object is passed in as the body of the 
 
 ##### PUT `/api/protected/components/{id}`
 Updates the Component object with the specified id. The Component object is passed in as the body of the request. Requires the `admin` role.
-
-#### Role-based authorization
-Call-dependent.
-
-#### Requires successful authentication
-Yes
 
 ## Building it
 The project uses the maven build tool. Typically, you build it by invoking `mvn clean install` at the command line. For simple file changes, not additions or deletions, you can usually use `mvn install`. See https://github.com/eurekaclinical/dev-wiki/wiki/Building-Eureka!-Clinical-projects for more details.
