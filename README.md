@@ -145,11 +145,11 @@ Properties:
 * `url`: the component's base URL.
 * `type`: the component's type represented as the unique id of a ComponentType.
 * `smallIcon`: the URL of a small icon to represent this component in web clients (optional).
-A relative URL should be interpreted as relative to the URL in the `url` property.
+A relative URL should be interpreted as relative to the URL in the `url` property. Any image type supported by web browsers will work.
 * `mediumIcon`: the URL of a medium-sized icon to represent this component in web clients (optional).
-A relative URL should be interpreted as relative to the URL in the `url` property.
+A relative URL should be interpreted as relative to the URL in the `url` property. Any image type supported by web browsers will work.
 * `largeIcon`: The URL of a large icon to represent this component in web clients (optional).
-A relative URL should be interpreted as relative to the URL in the `url` property.
+A relative URL should be interpreted as relative to the URL in the `url` property. Any image type supported by web browsers will work.
 
 #### Calls
 All calls use standard names, return values and status codes as specified in the [Eureka! Clinical microservice specification](https://github.com/eurekaclinical/dev-wiki/wiki/Eureka%21-Clinical-microservice-specification)
