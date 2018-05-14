@@ -118,7 +118,7 @@ Properties:
 #### Calls
 All calls use standard names, return values and status codes as specified in the [Eureka! Clinical microservice specification](https://github.com/eurekaclinical/dev-wiki/wiki/Eureka%21-Clinical-microservice-specification)
 
-#### GET `/api/protected/componenttypes`
+##### GET `/api/protected/componenttypes`
 Returns an array of all ComponentType objects.
 
 ##### GET `/api/protected/componenttypes/{id}`
