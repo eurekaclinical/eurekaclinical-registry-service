@@ -23,7 +23,6 @@ package org.eurekaclinical.registry.service.entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,30 +52,17 @@ public class GroupEntity implements org.eurekaclinical.standardapis.entity.Group
 
 	private String name;
 	private Long owner_id;
-	private Boolean read;
-	private Boolean write;
-	private Boolean execute;
-	
-	
 
-	@ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
-	@JoinTable(name = "user_group",
-			joinColumns = {
-				@JoinColumn(name = "group_id")},
-			inverseJoinColumns = {
-				@JoinColumn(name = "user_id")})
-	private List<UserEntity> users;
 
 	@ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinTable(name = "group_component",
 			joinColumns = {
 				@JoinColumn(name = "group_id")},
 			inverseJoinColumns = {
-				@JoinColumn(name = "components_id")})
+				@JoinColumn(name = "component_id")})
 	private List<ComponentEntity> components;
 
-	public GroupEntity() {
-		this.users = new ArrayList<>();
+	public GroupEntity() { 
 		this.components = new ArrayList<>();
 	}
 
@@ -111,56 +97,6 @@ public class GroupEntity implements org.eurekaclinical.standardapis.entity.Group
 		this.name = name;
 	}
 	
-	public Boolean getRead() {
-		return read;
-	}
-
-	public void setRead(Boolean read) {
-		this.read = read;
-	}
-
-	public Boolean getWrite() {
-		return write;
-	}
-
-
-	public void setWrite(Boolean write) {
-		this.write = write;
-	}
-
-	public Boolean getExecute() {
-		return execute;
-	}
-
-	public void setExecute(Boolean execute) {
-		this.execute = execute;
-	}
-
-
-	public List<UserEntity> getUsers() {
-		return new ArrayList<>(users);
-	}
-
-	public void setUsers(List<UserEntity> inUsers) {
-		if (inUsers == null) {
-			this.users = new ArrayList<>();
-		} else {
-			this.users = new ArrayList<>(inUsers);
-		}
-	}
-
-	public void addUsers(UserEntity inUser) {
-		if (!this.users.contains(inUser)) {
-			this.users.add(inUser);
-		}
-	}
-
-	public void removeI2b2Role(UserEntity inUser) {
-		this.users.remove(inUser);
-	}
-
-	
-	
 	public List<ComponentEntity> getComponents() {
 		return new ArrayList<>(components);
 	}
@@ -174,7 +110,7 @@ public class GroupEntity implements org.eurekaclinical.standardapis.entity.Group
 	}
 
 	public void addComponents(ComponentEntity inComponents) {
-		if (this.components.contains(inComponents)) {
+		if (!this.components.contains(inComponents)) {
 			this.components.add(inComponents);
 		}
 	}
@@ -212,6 +148,6 @@ public class GroupEntity implements org.eurekaclinical.standardapis.entity.Group
 
 	@Override
 	public String toString() {
-		return "GroupEntity{" + "id=" + id + ", name=" + name + ", users=" + users + ", components=" + components + '}';
+		return "GroupEntity{" + "id=" + id + ", name=" + name + ", components=" + components + '}';
 	}
 }

@@ -20,9 +20,13 @@ package org.eurekaclinical.registry.service.dao;
  * #L%
  */
 
+
+
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.persistence.EntityManager;
+
+
 import org.eurekaclinical.registry.service.entity.GroupEntity;
 import org.eurekaclinical.standardapis.dao.AbstractJpaGroupDao;
 
@@ -30,9 +34,9 @@ import org.eurekaclinical.standardapis.dao.AbstractJpaGroupDao;
 /**
  * 
  *
- * @author Dileep
+ * @author Dileep Gunda
  */
-public class JpaGroupDao extends AbstractJpaGroupDao<GroupEntity> {
+public class JpaGroupDao extends AbstractJpaGroupDao<GroupEntity> implements GroupDao {
 
     /**
      * Create an object with the give entity manager.
@@ -44,5 +48,6 @@ public class JpaGroupDao extends AbstractJpaGroupDao<GroupEntity> {
     public JpaGroupDao(final Provider<EntityManager> inEMProvider) {
         super(GroupEntity.class, inEMProvider);
     }
+
 
 }

@@ -29,11 +29,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import org.eurekaclinical.common.resource.AbstractGroupResource;
-import org.eurekaclinical.registry.service.dao.ComponentDao;
-import org.eurekaclinical.registry.service.dao.UserDao;
+import org.eurekaclinical.registry.service.dao.ComponentDao; 
 import org.eurekaclinical.registry.service.entity.GroupEntity;
-import org.eurekaclinical.registry.service.entity.ComponentEntity;
-import org.eurekaclinical.registry.service.entity.UserEntity;
+import org.eurekaclinical.registry.service.entity.ComponentEntity; 
 import org.eurekaclinical.registry.client.comm.RegistryGroup;
 import org.eurekaclinical.standardapis.dao.GroupDao;
 import org.eurekaclinical.standardapis.exception.HttpStatusException;
@@ -46,16 +44,13 @@ import org.eurekaclinical.standardapis.exception.HttpStatusException;
 @Transactional
 public class GroupResource extends AbstractGroupResource<GroupEntity, RegistryGroup > {
 
-    private final ComponentDao<ComponentEntity> componentDao;
-    private final UserDao<UserEntity> userDao;
+    private final ComponentDao<ComponentEntity> componentDao; 
 
     @Inject
     public GroupResource(GroupDao<GroupEntity> inGroupDao,
-    		ComponentDao<ComponentEntity> componentDao,
-    		UserDao<UserEntity> userDao) {
+    		ComponentDao<ComponentEntity> componentDao) {
         super(inGroupDao);
-        this.componentDao = componentDao;
-        this.userDao = userDao;
+        this.componentDao = componentDao; 
     }
 
     @Override
@@ -63,11 +58,6 @@ public class GroupResource extends AbstractGroupResource<GroupEntity, RegistryGr
     	RegistryGroup group = new RegistryGroup();
         group.setId(groupEntity.getId());
         group.setName(groupEntity.getName());
-        List<Long> users = new ArrayList<>();
-        for (UserEntity user : groupEntity.getUsers()) {
-            users.add(user.getId());
-        }
-        group.setUsers(users);
         List<Long> components = new ArrayList<>();
         for (ComponentEntity component : groupEntity.getComponents()) {
         	components.add(component.getId());
@@ -85,14 +75,6 @@ public class GroupResource extends AbstractGroupResource<GroupEntity, RegistryGr
             ComponentEntity componentEntity = this.componentDao.retrieve(componentsID);
             if (componentEntity != null) {
                 entity.addComponents(componentEntity);
-            } else {
-                throw new HttpStatusException(Response.Status.BAD_REQUEST);
-            }
-        }
-        for (Long userID : commObj.getUsers()) {
-            UserEntity userEntity = this.userDao.retrieve(userID);
-            if (userEntity != null) {
-                entity.addUsers(userEntity);
             } else {
                 throw new HttpStatusException(Response.Status.BAD_REQUEST);
             }
