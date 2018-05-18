@@ -26,12 +26,15 @@ import org.eurekaclinical.registry.service.dao.ComponentDao;
 import org.eurekaclinical.registry.service.dao.ComponentTypeDao;
 import org.eurekaclinical.registry.service.dao.JpaComponentDao;
 import org.eurekaclinical.registry.service.dao.JpaComponentTypeDao;
+import org.eurekaclinical.registry.service.dao.JpaGroupDao;
 import org.eurekaclinical.registry.service.dao.JpaRoleDao;
 import org.eurekaclinical.registry.service.dao.JpaUserDao;
 import org.eurekaclinical.registry.service.entity.ComponentEntity;
 import org.eurekaclinical.registry.service.entity.ComponentTypeEntity;
 import org.eurekaclinical.registry.service.entity.RoleEntity;
 import org.eurekaclinical.registry.service.entity.UserEntity;
+import org.eurekaclinical.registry.service.entity.GroupEntity;
+import org.eurekaclinical.standardapis.dao.GroupDao;
 import org.eurekaclinical.standardapis.dao.RoleDao;
 import org.eurekaclinical.standardapis.dao.UserDao;
 
@@ -47,5 +50,6 @@ public class AppModule extends AbstractModule {
         bind(new TypeLiteral<RoleDao<RoleEntity>>() {}).to(JpaRoleDao.class);
         bind(new TypeLiteral<ComponentDao<ComponentEntity>>() {}).to(JpaComponentDao.class);
         bind(new TypeLiteral<ComponentTypeDao<ComponentTypeEntity>>() {}).to(JpaComponentTypeDao.class);
+        bind(new TypeLiteral<GroupDao<GroupEntity>>() {}).to(JpaGroupDao.class);
     }
 }

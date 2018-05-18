@@ -152,4 +152,60 @@
             <column name="LARGEICON" type="VARCHAR(1024)"/>
         </addColumn>
     </changeSet>
+    <changeSet author="dileep" id="6">
+    
+		<createTable tableName="GROUPS">
+			<column name="ID" type="BIGINT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="GROUPS_PK" />
+			</column>
+			<column name="NAME" type="VARCHAR(255)">
+				<constraints nullable="false" unique="true"
+					uniqueConstraintName="GROUPS_NAME_UNIQ" />
+			</column>
+			<column name="OWNER_ID" type="BIGINT">
+				<constraints nullable="false" 
+					foreignKeyName="GROUP_USER_USERS_FK" referencedTableName="USERS"
+					referencedColumnNames="ID" />
+			</column>
+		</createTable>
+
+		<createSequence sequenceName="GROUP_SEQ" />
+
+		<createTable tableName="USER_GROUP">
+			<column name="USER_ID" type="BIGINT">
+				<constraints nullable="false"
+					foreignKeyName="USER_GROUP_USERS_FK" referencedTableName="USERS"
+					referencedColumnNames="ID" />
+			</column>
+			<column name="GROUP_ID" type="BIGINT">
+				<constraints nullable="false"
+					foreignKeyName="USER_GROUP_GROUPS_FK" referencedTableName="GROUPS"
+					referencedColumnNames="ID" />
+			</column>
+		</createTable>
+		
+		<createTable tableName="GROUP_COMPONENT">
+			<column name="GROUP_ID" type="BIGINT">
+				<constraints nullable="false"
+					foreignKeyName="GROUP_COMPONENT_GROUPS_FK" referencedTableName="GROUPS"
+					referencedColumnNames="ID" />
+			</column>
+			<column name="COMPONENT_ID" type="BIGINT">
+				<constraints nullable="false"
+					foreignKeyName="GROUP_COMPONENT_COMPONENTS_FK" referencedTableName="COMPONENTS"
+					referencedColumnNames="ID" />
+			</column>			
+			<column name="READ" type="BOOLEAN">
+				<constraints nullable="false"/>
+			</column>
+			<column name="WRITE" type="BOOLEAN">
+				<constraints nullable="false"/>
+			</column>
+			<column name="EXECUTE" type="BOOLEAN">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		
+	</changeSet>
 </databaseChangeLog>

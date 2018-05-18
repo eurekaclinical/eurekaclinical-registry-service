@@ -58,6 +58,17 @@ public class UserEntity implements org.eurekaclinical.standardapis.entity.UserEn
             inverseJoinColumns = {
                 @JoinColumn(name = "role_id")})
     private List<RoleEntity> roles = new ArrayList<>();
+    
+    /**
+     * A list of Groups assigned to the user.
+     */
+    @ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+    @JoinTable(name = "user_group",
+            joinColumns = {
+                @JoinColumn(name = "user_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "group_id")})
+    private List<GroupEntity> groups = new ArrayList<>();
 
     /**
      * Create an empty User object.
@@ -131,6 +142,7 @@ public class UserEntity implements org.eurekaclinical.standardapis.entity.UserEn
     }
 
     public void addRole(RoleEntity inRole) {
+    	if(!this.roles.contains(inRole))
         this.roles.add(inRole);
     }
 
@@ -138,6 +150,17 @@ public class UserEntity implements org.eurekaclinical.standardapis.entity.UserEn
         this.roles.remove(inRole);
     }
 
+    
+    public void addGroup(GroupEntity inGroup) {
+    	if(!this.groups.contains(inGroup))
+        this.groups.add(inGroup);
+    }
+
+    public void removeGroup(GroupEntity inGroup) {
+        this.groups.remove(inGroup);
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 5;

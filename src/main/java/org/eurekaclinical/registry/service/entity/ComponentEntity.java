@@ -38,10 +38,10 @@ import javax.persistence.Table;
 @Table(name = "components")
 public class ComponentEntity implements org.eurekaclinical.standardapis.entity.Entity<Long> {
     @Id
-    @SequenceGenerator(name = "COMP_TYPE_SEQ_GENERATOR", sequenceName = "COMP_TYPE_SEQ",
+    @SequenceGenerator(name = "COMP_SEQ_GENERATOR", sequenceName = "COMP_SEQ",
             allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "COMP_TYPE_SEQ_GENERATOR")
+            generator = "COMP_SEQ_GENERATOR")
     private Long id;
     
     @Column(unique = true, nullable = false)
