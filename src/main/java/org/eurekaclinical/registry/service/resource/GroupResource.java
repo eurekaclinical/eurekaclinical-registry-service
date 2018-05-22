@@ -48,19 +48,19 @@ public class GroupResource extends AbstractGroupResource<GroupEntity, RegistryGr
 
     @Inject
     public GroupResource(GroupDao<GroupEntity> inGroupDao,
-    		ComponentDao<ComponentEntity> componentDao) {
+            ComponentDao<ComponentEntity> componentDao) {
         super(inGroupDao);
         this.componentDao = componentDao; 
     }
 
     @Override
     protected RegistryGroup toComm(GroupEntity groupEntity, HttpServletRequest req) {
-    	RegistryGroup group = new RegistryGroup();
+        RegistryGroup group = new RegistryGroup();
         group.setId(groupEntity.getId());
         group.setName(groupEntity.getName());
         List<Long> components = new ArrayList<>();
         for (ComponentEntity component : groupEntity.getComponents()) {
-        	components.add(component.getId());
+            components.add(component.getId());
         }
         group.setComponents(components);
         return group;

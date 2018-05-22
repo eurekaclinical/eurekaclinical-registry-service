@@ -30,8 +30,8 @@ import org.eurekaclinical.standardapis.dao.Dao;
  * @author Dileep Gunda
  */
 public interface GroupDao extends Dao<GroupEntity, Long> {
-	GroupEntity getByName(String name);
-	
+    GroupEntity getByName(String name);
+    
 
-	
+    
 }

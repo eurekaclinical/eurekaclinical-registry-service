@@ -142,7 +142,7 @@ public class UserEntity implements org.eurekaclinical.standardapis.entity.UserEn
     }
 
     public void addRole(RoleEntity inRole) {
-    	if(!this.roles.contains(inRole))
+        if(!this.roles.contains(inRole))
         this.roles.add(inRole);
     }
 
@@ -152,7 +152,7 @@ public class UserEntity implements org.eurekaclinical.standardapis.entity.UserEn
 
     
     public void addGroup(GroupEntity inGroup) {
-    	if(!this.groups.contains(inGroup))
+        if(!this.groups.contains(inGroup))
         this.groups.add(inGroup);
     }
 
