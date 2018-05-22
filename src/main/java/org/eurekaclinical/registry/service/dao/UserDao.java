@@ -31,6 +31,6 @@ import org.eurekaclinical.standardapis.dao.Dao;
 public interface UserDao <U extends UserEntity> extends Dao<U, Long> {
 
     U getUsersByName(String name);
-	
-	List<U> getUsersForGroup(String username);
+    
+    List<U> getUsersForGroup(String username);
 }
