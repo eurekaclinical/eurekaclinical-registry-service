@@ -22,10 +22,7 @@ package org.eurekaclinical.registry.service.filter;
 
 
 import java.io.IOException;
-import java.net.URI;
-import java.security.Principal;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -37,18 +34,19 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.eurekaclinical.common.comm.clients.ClientException;
 import org.eurekaclinical.standardapis.dao.UserTemplateDao;   
+import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.eurekaclinical.registry.service.entity.UserEntity;
 import org.eurekaclinical.registry.service.entity.RoleEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
 import org.eurekaclinical.registry.service.dao.UserDao;
+import org.eurekaclinical.registry.service.resource.AutoAuthCriteriaParser;
 
 public class AutoAuthorizationFilter<R extends RoleEntity,U extends UserEntity, T extends UserTemplateEntity> implements Filter {
 
     private final UserTemplateDao<T> userTemplateDao;
     private final UserDao<U> userDao;
-    
+    private final AutoAuthCriteriaParser AUTO_AUTH_CRITERIA_PARSER = new AutoAuthCriteriaParser();
     
     @Inject
     public AutoAuthorizationFilter(UserTemplateDao<T> inUserTemplateDao,
@@ -68,9 +66,10 @@ public class AutoAuthorizationFilter<R extends RoleEntity,U extends UserEntity, 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest servletRequest = (HttpServletRequest) request;
-        Principal principal = servletRequest.getUserPrincipal();
+        AttributePrincipal userPrincipal = (AttributePrincipal) servletRequest.getUserPrincipal();
         HttpSession session = servletRequest.getSession(false);
-        if (principal != null && session != null) {
+        if (userPrincipal != null && session != null) {
+            Map<String, Object> attributes = userPrincipal.getAttributes();
             String[] roleNames;
             synchronized (session) {
                 roleNames = (String[]) session.getAttribute("roles");
@@ -79,7 +78,7 @@ public class AutoAuthorizationFilter<R extends RoleEntity,U extends UserEntity, 
                     String remoteUser = servletRequest.getRemoteUser();
                     T autoAuthorizationTemplate = this.userTemplateDao.getAutoAuthorizationTemplate(); 
                     try {
-                        if (remoteUser != null && autoAuthorizationTemplate != null) {
+                        if (remoteUser != null && autoAuthorizationTemplate != null && AUTO_AUTH_CRITERIA_PARSER.parse(autoAuthorizationTemplate.getCriteria(), attributes)) {
                             //User Creation
                             U user = toUserEntity(autoAuthorizationTemplate, remoteUser);
                             this.userDao.create(user);
@@ -92,10 +91,6 @@ public class AutoAuthorizationFilter<R extends RoleEntity,U extends UserEntity, 
                         }
                         chain.doFilter(request, response);
                    
-                } else if (roleNames.length != 0) {
-                    // User and associated roles found
-                } else {
-                    // User found with No Associated roles
                 }
             }
             chain.doFilter(request, response);
