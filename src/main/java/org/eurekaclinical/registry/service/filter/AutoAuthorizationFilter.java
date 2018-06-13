@@ -38,15 +38,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.eurekaclinical.common.comm.clients.ClientException;
-import org.eurekaclinical.standardapis.dao.UserDao;
-import org.eurekaclinical.standardapis.dao.UserTemplateDao;
-import org.eurekaclinical.standardapis.entity.RoleEntity;
-import org.eurekaclinical.standardapis.entity.UserEntity;
-import org.eurekaclinical.standardapis.entity.UserTemplateEntity;
-import org.eurekaclinical.standardapis.exception.HttpStatusException;
+import org.eurekaclinical.standardapis.dao.UserTemplateDao;   
 import org.jasig.cas.client.authentication.AttributePrincipal;
+import org.eurekaclinical.registry.service.entity.UserEntity;
+import org.eurekaclinical.registry.service.entity.RoleEntity;
+import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
+import org.eurekaclinical.registry.service.dao.UserDao;
 
-public class AutoAuthorizationFilter<R extends RoleEntity,U extends UserEntity<R>, T extends UserTemplateEntity<R>> implements Filter {
+public class AutoAuthorizationFilter<R extends RoleEntity,U extends UserEntity, T extends UserTemplateEntity> implements Filter {
 
     private final UserTemplateDao<T> userTemplateDao;
     private final UserDao<U> userDao;
@@ -77,44 +76,48 @@ public class AutoAuthorizationFilter<R extends RoleEntity,U extends UserEntity<R
             synchronized (session) {
                 roleNames = (String[]) session.getAttribute("roles");
                 if (roleNames == null) {
+                    //User Not Found
                     String remoteUser = servletRequest.getRemoteUser();
-                    if (remoteUser != null) {
-                        T autoAuthorizationTemplate = this.userTemplateDao.getAutoAuthorizationTemplate();
-                        if (this.userDao.getByName(remoteUser) == null) {
-                            if (autoAuthorizationTemplate != null) {
-                                U user = toUserEntity(autoAuthorizationTemplate, remoteUser);
-                                this.userDao.create(user);
-                            }
+                    T autoAuthorizationTemplate = this.userTemplateDao.getAutoAuthorizationTemplate(); 
+                    try {
+                        if (remoteUser != null && autoAuthorizationTemplate != null) {
+                            //User Creation
+                            U user = toUserEntity(autoAuthorizationTemplate, remoteUser);
+                            this.userDao.create(user);
                         }
-                    }
-                    chain.doFilter(request, response);
-
+                        else {
+                           // throw new Exception(Remote User or Template error);
+                        }
+                       } catch (Exception ex) {      
+                           // throw new Exception(User Creation error);
+                        }
+                        chain.doFilter(request, response);
+                   
                 } else if (roleNames.length != 0) {
                     // User and associated roles found
                 } else {
                     // User found with No Associated roles
                 }
             }
-            // HttpServletRequest wrappedRequest = new RolesRequestWrapper(
-            // servletRequest, principal, roleNames);
-            // chain.doFilter(wrappedRequest, inResponse);
             chain.doFilter(request, response);
         } else {
-            chain.doFilter(request, response);
+            //throw new Exception
         }
     }
 
     @Override
     public void destroy() {
         // TODO Auto-generated method stub
-        
+
     }
 
-    protected  U toUserEntity(T userTemplate, String username) {
-        return null;
-        
+    protected U toUserEntity(T userTemplate, String username) {
+        U user = (U) new UserEntity();
+        user.setUsername(username);
+        user.setGroups(userTemplate.getGroups());
+        user.setRoles(userTemplate.getRoles());
+        return user;
+
     }
 
-
-  
 }
