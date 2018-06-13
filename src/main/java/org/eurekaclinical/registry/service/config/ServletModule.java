@@ -21,9 +21,8 @@ package org.eurekaclinical.registry.service.config;
  */
 
 import org.eurekaclinical.common.config.AbstractAuthorizingJerseyServletModuleWithPersist;
-import org.eurekaclinical.registry.service.filter.AutoAuthorizationFilter;;
+import org.eurekaclinical.registry.service.filter.AutoAuthorizationFilter;
 import org.eurekaclinical.registry.service.props.ServiceProperties;
-import org.eurekaclinical.standardapis.filter.RolesFromDbFilter;
 
 /**
  * Created by akalsan on 10/4/16.
