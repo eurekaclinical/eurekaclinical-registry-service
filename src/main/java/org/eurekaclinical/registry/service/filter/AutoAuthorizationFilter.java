@@ -39,7 +39,6 @@ import javax.servlet.http.HttpSession;
 
 import org.eurekaclinical.common.comm.clients.ClientException;
 import org.eurekaclinical.standardapis.dao.UserTemplateDao;   
-import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.eurekaclinical.registry.service.entity.UserEntity;
 import org.eurekaclinical.registry.service.entity.RoleEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
