@@ -41,56 +41,56 @@ import java.util.Map;
  */
 class FreemarkerBuiltIns {
 
-	private final Configuration cfg;
+    private final Configuration cfg;
 
-	FreemarkerBuiltIns() {
-		Version freemarkerVersionCompat = new Version(2, 3, 23);
-		this.cfg = new Configuration(freemarkerVersionCompat);
-		this.cfg.setObjectWrapper(new DefaultObjectWrapper(freemarkerVersionCompat));
-	}
+    FreemarkerBuiltIns() {
+        Version freemarkerVersionCompat = new Version(2, 3, 23);
+        this.cfg = new Configuration(freemarkerVersionCompat);
+        this.cfg.setObjectWrapper(new DefaultObjectWrapper(freemarkerVersionCompat));
+    }
 
-	/**
-	 * Evaluates a string as a Freemarker Template Language expression.
-	 *
-	 * @param expr a Freemarker Template Language expression. Cannot be
-	 * <code>null</code>.
-	 *
-	 * @return the result of the expression as a string. Guaranteed not
-	 * <code>null</code>.
-	 *
-	 * @throws TemplateException if an error occurred evaluating the expression.
-	 */
-	String eval(String expr) throws TemplateException {
-		return eval(expr, null);
-	}
+    /**
+     * Evaluates a string as a Freemarker Template Language expression.
+     *
+     * @param expr a Freemarker Template Language expression. Cannot be
+     * <code>null</code>.
+     *
+     * @return the result of the expression as a string. Guaranteed not
+     * <code>null</code>.
+     *
+     * @throws TemplateException if an error occurred evaluating the expression.
+     */
+    String eval(String expr) throws TemplateException {
+        return eval(expr, null);
+    }
 
-	/**
-	 * Evaluates a string as a Freemarker Template Language expression.
-	 * 
-	 * @param expr a Freemarker Template Language expression. Cannot be
-	 * <code>null</code>.
-	 * @param model a map of variable names to values. The variables may be used
-	 * in the expression.
-	 *
-	 * @return the result of the expression as a string. Guaranteed not
-	 * <code>null</code>.
-	 *
-	 * @throws TemplateException if an error occurred evaluating the expression.
-	 */
-	String eval(String expr, Map<String, ? extends Object> model) throws TemplateException {
-		if (expr == null) {
-			throw new IllegalArgumentException("expr cannot be null");
-		}
-		try {
-			Template t = new Template("t", "${(" + expr.trim() + ")?c}", this.cfg);
-			StringWriter w = new StringWriter();
-			try (StringWriter ww = w) {
-				t.process(model, ww);
-			}
-			return w.toString();
-		} catch (IOException ex) {
-			throw new AssertionError(ex);
-		}
-	}
+    /**
+     * Evaluates a string as a Freemarker Template Language expression.
+     * 
+     * @param expr a Freemarker Template Language expression. Cannot be
+     * <code>null</code>.
+     * @param model a map of variable names to values. The variables may be used
+     * in the expression.
+     *
+     * @return the result of the expression as a string. Guaranteed not
+     * <code>null</code>.
+     *
+     * @throws TemplateException if an error occurred evaluating the expression.
+     */
+    String eval(String expr, Map<String, ? extends Object> model) throws TemplateException {
+        if (expr == null) {
+            throw new IllegalArgumentException("expr cannot be null");
+        }
+        try {
+            Template t = new Template("t", "${(" + expr.trim() + ")?c}", this.cfg);
+            StringWriter w = new StringWriter();
+            try (StringWriter ww = w) {
+                t.process(model, ww);
+            }
+            return w.toString();
+        } catch (IOException ex) {
+            throw new AssertionError(ex);
+        }
+    }
 
 }
