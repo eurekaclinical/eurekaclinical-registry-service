@@ -6,8 +6,10 @@ The registry service provides a list of deployed Eureka! Clinical components.
 Its initial purpose is for resource discovery such as populating menus and other lists of
 available components.
 
-## Version 1.2 development series
 Latest release: [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-registry-service/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-registry-service)
+
+## Version 1.2
+Adds an icon property to components.
 
 ## Version 1.1
 The properties in the application.properties were named in a non-standard way in version 1.0,
