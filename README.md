@@ -8,6 +8,9 @@ available components.
 
 Latest release: [![Latest release](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-registry-service/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.eurekaclinical/eurekaclinical-registry-service)
 
+## Version 1.3
+Updates dependencies.
+
 ## Version 1.2
 Adds an icon property to components.
 
