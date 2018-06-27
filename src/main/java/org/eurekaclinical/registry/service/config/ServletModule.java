@@ -20,7 +20,8 @@ package org.eurekaclinical.registry.service.config;
  * #L%
  */
 
-import org.eurekaclinical.common.config.AbstractAuthorizingJerseyServletModuleWithPersist; 
+import org.eurekaclinical.common.config.AbstractAuthorizingJerseyServletModuleWithPersist;
+import org.eurekaclinical.registry.service.filter.AutoAuthorizationFilter;
 import org.eurekaclinical.registry.service.props.ServiceProperties;
 
 /**
@@ -37,5 +38,6 @@ public class ServletModule extends AbstractAuthorizingJerseyServletModuleWithPer
     @Override
     protected void setupFilters() {
         super.setupFilters(); 
+        filter("/*").through(AutoAuthorizationFilter.class);
     }
 }
