@@ -23,13 +23,22 @@ package org.eurekaclinical.registry.service.filter;
 
 import org.eurekaclinical.registry.service.entity.UserEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
-import org.eurekaclinical.registry.service.entity.RoleEntity; 
+import org.eurekaclinical.registry.service.entity.RoleEntity;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import org.eurekaclinical.common.filter.AbstractAutoAuthorizationFilter;
 import org.eurekaclinical.standardapis.dao.UserDao;
 import org.eurekaclinical.standardapis.dao.UserTemplateDao;
 
+
+
+
+@Singleton
 public class AutoAuthorizationFilter extends AbstractAutoAuthorizationFilter<RoleEntity, UserEntity, UserTemplateEntity>{
  
+@Inject
     public AutoAuthorizationFilter(UserTemplateDao<UserTemplateEntity> inUserTemplateDao,
             UserDao<UserEntity> inUserDao) {
         super(inUserTemplateDao, inUserDao);
