@@ -125,7 +125,7 @@
             <column name="NAME" value="SERVICE"/>
             <column name="DESCRIPTION" value="Service"/>
         </insert>
-	<insert tableName="COMPONENT_TYPES">
+    <insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
             <column name="NAME" value="WEBAPP"/>
             <column name="DESCRIPTION" value="Web application"/>
@@ -151,5 +151,106 @@
         <addColumn tableName="COMPONENTS">
             <column name="LARGEICON" type="VARCHAR(1024)"/>
         </addColumn>
+    </changeSet>
+    <changeSet author="dileep" id="6">
+    
+        <createTable tableName="GROUPS">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"
+                    primaryKeyName="GROUPS_PK" />
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"
+                    uniqueConstraintName="GROUPS_NAME_UNIQ" />
+            </column>
+            <column name="OWNER_ID" type="BIGINT">
+                <constraints nullable="false" 
+                    foreignKeyName="GROUP_USER_USERS_FK" referencedTableName="USERS"
+                    referencedColumnNames="ID" />
+            </column>
+        </createTable>
+
+        <createSequence sequenceName="GROUP_SEQ" />
+
+        <createTable tableName="USER_GROUP">
+            <column name="USER_ID" type="BIGINT">
+                <constraints nullable="false"
+                    foreignKeyName="USER_GROUP_USERS_FK" referencedTableName="USERS"
+                    referencedColumnNames="ID" />
+            </column>
+            <column name="GROUP_ID" type="BIGINT">
+                <constraints nullable="false"
+                    foreignKeyName="USER_GROUP_GROUPS_FK" referencedTableName="GROUPS"
+                    referencedColumnNames="ID" />
+            </column>
+        </createTable>
+        
+        <createTable tableName="GROUP_COMPONENT">
+            <column name="GROUP_ID" type="BIGINT">
+                <constraints nullable="false"
+                    foreignKeyName="GROUP_COMPONENT_GROUPS_FK" referencedTableName="GROUPS"
+                    referencedColumnNames="ID" />
+            </column>
+            <column name="COMPONENT_ID" type="BIGINT">
+                <constraints nullable="false"
+                    foreignKeyName="GROUP_COMPONENT_COMPONENTS_FK" referencedTableName="COMPONENTS"
+                    referencedColumnNames="ID" />
+            </column>           
+            <column name="READ" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="WRITE" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXECUTE" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+    </changeSet>
+    <changeSet id="7" author="dileep">
+
+        <createTable tableName="USERTEMPLATES">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"
+                    primaryKeyName="UT_PK" />
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"
+                    uniqueConstraintName="UT_NAME_UNIQ" />
+            </column>
+            <column name="AUTOAUTHORIZE" type="BOOLEAN">
+                <constraints nullable="false" />
+            </column>
+            <column name="CRITERIA" type="VARCHAR(255)" />
+        </createTable>
+
+        <createSequence sequenceName="UT_SEQ" />
+
+        <createTable tableName="USERTEMPLATE_ROLE">
+            <column name="USERTEMPLATE_ID" type="BIGINT">
+                <constraints nullable="false"
+                    foreignKeyName="UT_ROLE_USERTEMPLATES_FK"
+                    referencedColumnNames="ID" referencedTableName="USERTEMPLATES" />
+            </column>
+            <column name="ROLE_ID" type="BIGINT">
+                <constraints nullable="false"
+                    foreignKeyName="UT_ROLE_ROLES_FK" referencedColumnNames="ID"
+                    referencedTableName="ROLES" />
+            </column>
+        </createTable>
+
+        <createTable tableName="USERTEMPLATE_GROUP">
+            <column name="USERTEMPLATE_ID" type="BIGINT">
+                <constraints nullable="false"
+                    foreignKeyName="UT_GROUP_USERTEMPLATES_FK"
+                    referencedColumnNames="ID" referencedTableName="USERTEMPLATES" />
+            </column>
+            <column name="GROUP_ID" type="BIGINT">
+                <constraints nullable="false"
+                    foreignKeyName="UT_GROUP_GROUPS_FK" referencedColumnNames="ID"
+                    referencedTableName="GROUPS" />
+            </column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>
