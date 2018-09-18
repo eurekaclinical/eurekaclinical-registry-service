@@ -23,9 +23,9 @@ package org.eurekaclinical.registry.service.resource;
 import com.google.inject.persist.Transactional;
 import org.eurekaclinical.common.comm.User;
 import org.eurekaclinical.common.resource.AbstractUserResource;
-import org.eurekaclinical.registry.service.entity.RoleEntity;
-import org.eurekaclinical.registry.service.entity.UserEntity;
-import org.eurekaclinical.standardapis.dao.RoleDao;
+import org.eurekaclinical.registry.service.dao.RegistryServiceRoleDao;
+import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
+import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
 import org.eurekaclinical.standardapis.dao.UserDao;
 
 import javax.inject.Inject;
@@ -39,23 +39,23 @@ import java.util.List;
  */
 @Path("/protected/users")
 @Transactional
-public class UserResource extends AbstractUserResource<User, UserEntity, RoleEntity> {
+public class UserResource extends AbstractUserResource<User, AuthorizedUserEntity, AuthorizedRoleEntity> {
 
-    private final RoleDao<RoleEntity> roleDao;
+    private final RegistryServiceRoleDao roleDao;
 
     @Inject
-    public UserResource(UserDao<UserEntity> inUserDao, RoleDao<RoleEntity> inRoleDao) {
+    public UserResource(UserDao<AuthorizedUserEntity> inUserDao, RegistryServiceRoleDao inRoleDao) {
         super(inUserDao);
         this.roleDao = inRoleDao;
     }
 
     @Override
-    protected User toComm(UserEntity userEntity, HttpServletRequest req) {
+    protected User toComm(AuthorizedUserEntity userEntity, HttpServletRequest req) {
         User user = new User();
         user.setId(userEntity.getId());
         user.setUsername(userEntity.getUsername());
         List<Long> roles = new ArrayList<>();
-        for (RoleEntity roleEntity : userEntity.getRoles()) {
+        for (AuthorizedRoleEntity roleEntity : userEntity.getRoles()) {
             roles.add(roleEntity.getId());
         }
         user.setRoles(roles);
@@ -63,14 +63,14 @@ public class UserResource extends AbstractUserResource<User, UserEntity, RoleEnt
     }
 
     @Override
-    protected UserEntity toEntity(User user) {
-        List<RoleEntity> roleEntities = this.roleDao.getAll();
-        UserEntity userEntity = new UserEntity();
+    protected AuthorizedUserEntity toEntity(User user) {
+        List<AuthorizedRoleEntity> roleEntities = this.roleDao.getAll();
+        AuthorizedUserEntity userEntity = new AuthorizedUserEntity();
         userEntity.setId(user.getId());
         userEntity.setUsername(user.getUsername());
-        List<RoleEntity> userRoleEntities = new ArrayList<>();
+        List<AuthorizedRoleEntity> userRoleEntities = new ArrayList<>();
         for (Long roleId : user.getRoles()) {
-            for (RoleEntity roleEntity : roleEntities) {
+            for (AuthorizedRoleEntity roleEntity : roleEntities) {
                 if (roleEntity.getId().equals(roleId)) {
                     userRoleEntities.add(roleEntity);
                 }
