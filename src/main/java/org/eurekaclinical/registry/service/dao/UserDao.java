@@ -21,14 +21,14 @@ package org.eurekaclinical.registry.service.dao;
  */
 
 import java.util.List;
-import org.eurekaclinical.registry.service.entity.UserEntity;
+import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
 import org.eurekaclinical.standardapis.dao.Dao;
 
 /**
  *
  * @author Dileep Gunda
  */
-public interface UserDao <U extends UserEntity> extends Dao<U, Long> {
+public interface UserDao <U extends AuthorizedUserEntity> extends Dao<U, Long> {
 
     U getUsersByName(String name);
     

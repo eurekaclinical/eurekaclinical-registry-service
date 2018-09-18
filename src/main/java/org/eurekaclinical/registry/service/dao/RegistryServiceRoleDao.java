@@ -1,10 +1,10 @@
-package org.eurekaclinical.registry.service.config;
+package org.eurekaclinical.registry.service.dao;
 
 /*-
  * #%L
  * Eureka! Clinical Registry Service
  * %%
- * Copyright (C) 2017 Emory University
+ * Copyright (C) 2017 - 2018 Emory University
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,8 @@ package org.eurekaclinical.registry.service.config;
  * #L%
  */
 
-import org.eurekaclinical.common.config.AbstractAuthorizingJerseyServletModuleWithPersist;
-import org.eurekaclinical.registry.service.props.ServiceProperties;
+import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
 
-/**
- * Created by akalsan on 10/4/16.
- */
-public class ServletModule extends AbstractAuthorizingJerseyServletModuleWithPersist {
+public interface RegistryServiceRoleDao extends org.eurekaclinical.standardapis.dao.RoleDao<AuthorizedRoleEntity> {
 
-    private static final String PACKAGE_NAMES = "org.eurekaclinical.registry.service.resource";
-
-    public ServletModule(ServiceProperties inProperties) {
-        super(inProperties, PACKAGE_NAMES, false);
-    }
-    
 }
