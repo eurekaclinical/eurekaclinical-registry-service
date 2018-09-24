@@ -30,7 +30,7 @@ import javax.ws.rs.Path;
 import org.eurekaclinical.standardapis.dao.RoleDao;
 import org.eurekaclinical.common.resource.AbstractUserTemplateResource;
 import org.eurekaclinical.registry.service.entity.GroupEntity;
-import org.eurekaclinical.registry.service.entity.RoleEntity;
+import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
 import org.eurekaclinical.standardapis.dao.GroupDao;
 import org.eurekaclinical.registry.client.comm.RegistryUserTemplate;
@@ -42,13 +42,13 @@ import org.eurekaclinical.standardapis.dao.UserTemplateDao;
  */
 @Path("/protected/usertemplates")
 @Transactional
-public class UserTemplateResource extends AbstractUserTemplateResource<RegistryUserTemplate, RoleEntity, UserTemplateEntity> {
+public class UserTemplateResource extends AbstractUserTemplateResource<RegistryUserTemplate, AuthorizedRoleEntity, UserTemplateEntity> {
 
-    private final RoleDao<RoleEntity> roleDao;
+    private final RoleDao<AuthorizedRoleEntity> roleDao;
     private final GroupDao<GroupEntity> groupDao;
 
     @Inject
-    public UserTemplateResource(UserTemplateDao<UserTemplateEntity> inUserDao, RoleDao<RoleEntity> inRoleDao, GroupDao<GroupEntity> inGroupDao) {
+    public UserTemplateResource(UserTemplateDao<AuthorizedRoleEntity, UserTemplateEntity> inUserDao, RoleDao<AuthorizedRoleEntity> inRoleDao, GroupDao<GroupEntity> inGroupDao) {
         super(inUserDao);
         this.roleDao = inRoleDao;
         this.groupDao = inGroupDao;
@@ -60,7 +60,7 @@ public class UserTemplateResource extends AbstractUserTemplateResource<RegistryU
         template.setId(templateEntity.getId());
         template.setName(templateEntity.getName());
         List<Long> roles = new ArrayList<>();
-        for (RoleEntity roleEntity : templateEntity.getRoles()) {
+        for (AuthorizedRoleEntity roleEntity : templateEntity.getRoles()) {
             roles.add(roleEntity.getId());
         }
         template.setRoles(roles);
@@ -79,9 +79,9 @@ public class UserTemplateResource extends AbstractUserTemplateResource<RegistryU
         UserTemplateEntity templateEntity = new UserTemplateEntity();
         templateEntity.setId(template.getId());
         templateEntity.setName(template.getName());
-        List<RoleEntity> roleEntities = this.roleDao.getAll();
+        List<AuthorizedRoleEntity> roleEntities = this.roleDao.getAll();
         for (Long roleId : template.getRoles()) {
-            for (RoleEntity roleEntity : roleEntities) {
+            for (AuthorizedRoleEntity roleEntity : roleEntities) {
                 if (roleEntity.getId().equals(roleId)) {
                     templateEntity.addRole(roleEntity);
                 }

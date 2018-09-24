@@ -23,10 +23,11 @@
   <persistence-unit name="service-jpa-unit" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <non-jta-data-source>java:comp/env/jdbc/EurekaClinicalRegistryService</non-jta-data-source>
-    <class>org.eurekaclinical.serviceregistry.entity.RoleEntity</class>
-    <class>org.eurekaclinical.serviceregistry.entity.UserEntity</class>
+    <class>org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity</class>
+    <class>org.eurekaclinical.registry.service.entity.AuthorizedUserEntity</class>
     <class>org.eurekaclinical.registry.service.entity.ComponentEntity</class>
     <class>org.eurekaclinical.registry.service.entity.ComponentTypeEntity</class>
+    <class>org.eurekaclinical.registry.service.entity.UserTemplateEntity</class>
     <properties>
       <!-- Disable the second-level cache -->
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

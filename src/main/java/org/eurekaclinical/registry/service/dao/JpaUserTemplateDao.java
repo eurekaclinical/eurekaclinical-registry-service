@@ -24,8 +24,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.persistence.EntityManager;
+
+import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
+import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
 import org.eurekaclinical.standardapis.dao.AbstractJpaUserTemplateDao;
+import org.eurekaclinical.standardapis.entity.UserEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity_;
 
 /**
@@ -33,7 +37,7 @@ import org.eurekaclinical.registry.service.entity.UserTemplateEntity_;
  *
  * @author Dileep Gunda
  */
-public class JpaUserTemplateDao extends AbstractJpaUserTemplateDao<UserTemplateEntity> {
+public class JpaUserTemplateDao extends AbstractJpaUserTemplateDao<AuthorizedRoleEntity, UserTemplateEntity> {
 
     /**
      * Create an object with the give entity manager.
@@ -54,6 +58,14 @@ public class JpaUserTemplateDao extends AbstractJpaUserTemplateDao<UserTemplateE
         } else {
             return result.get(0);
         }
+    }
+    
+    @Override
+    public UserEntity newUserEntityInstance(String username, List<AuthorizedRoleEntity> roles) {
+        AuthorizedUserEntity user = new AuthorizedUserEntity();
+        user.setUsername(username);
+        user.setRoles(roles);
+        return user;
     }
 
 }

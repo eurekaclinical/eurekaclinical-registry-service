@@ -40,7 +40,7 @@ package org.eurekaclinical.registry.service.dao;
  * ${symbol_pound}L%
  */
 
-import org.eurekaclinical.registry.service.entity.UserEntity;
+import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -49,7 +49,7 @@ import javax.persistence.EntityManager;
 /**
  * Created by akalsan on 10/4/16.
  */
-public class JpaUserDao extends org.eurekaclinical.standardapis.dao.AbstractJpaUserDao<UserEntity> {
+public class JpaUserDao extends org.eurekaclinical.standardapis.dao.AbstractJpaUserDao<AuthorizedUserEntity> {
 
     /**
      * Create an object with the give entity manager.
@@ -59,7 +59,7 @@ public class JpaUserDao extends org.eurekaclinical.standardapis.dao.AbstractJpaU
      */
     @Inject
     public JpaUserDao(final Provider<EntityManager> inEMProvider) {
-        super(UserEntity.class, inEMProvider);
+        super(AuthorizedUserEntity.class, inEMProvider);
     }
 
 }
