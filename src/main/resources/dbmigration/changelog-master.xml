@@ -10,13 +10,13 @@
   
        http://www.apache.org/licenses/LICENSE-2.0
   
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-  #L%
-  -->
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+#L%
+-->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -125,7 +125,7 @@
             <column name="NAME" value="SERVICE"/>
             <column name="DESCRIPTION" value="Service"/>
         </insert>
-    <insert tableName="COMPONENT_TYPES">
+        <insert tableName="COMPONENT_TYPES">
             <column name="ID" valueSequenceNext="COMP_TYPE_SEQ"/>
             <column name="NAME" value="WEBAPP"/>
             <column name="DESCRIPTION" value="Web application"/>
@@ -157,16 +157,16 @@
         <createTable tableName="GROUPS">
             <column name="ID" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"
-                    primaryKeyName="GROUPS_PK" />
+                             primaryKeyName="GROUPS_PK" />
             </column>
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false" unique="true"
-                    uniqueConstraintName="GROUPS_NAME_UNIQ" />
+                             uniqueConstraintName="GROUPS_NAME_UNIQ" />
             </column>
             <column name="OWNER_ID" type="BIGINT">
                 <constraints nullable="false" 
-                    foreignKeyName="GROUP_USER_USERS_FK" referencedTableName="USERS"
-                    referencedColumnNames="ID" />
+                             foreignKeyName="GROUP_USER_USERS_FK" referencedTableName="USERS"
+                             referencedColumnNames="ID" />
             </column>
         </createTable>
 
@@ -175,26 +175,26 @@
         <createTable tableName="USER_GROUP">
             <column name="USER_ID" type="BIGINT">
                 <constraints nullable="false"
-                    foreignKeyName="USER_GROUP_USERS_FK" referencedTableName="USERS"
-                    referencedColumnNames="ID" />
+                             foreignKeyName="USER_GROUP_USERS_FK" referencedTableName="USERS"
+                             referencedColumnNames="ID" />
             </column>
             <column name="GROUP_ID" type="BIGINT">
                 <constraints nullable="false"
-                    foreignKeyName="USER_GROUP_GROUPS_FK" referencedTableName="GROUPS"
-                    referencedColumnNames="ID" />
+                             foreignKeyName="USER_GROUP_GROUPS_FK" referencedTableName="GROUPS"
+                             referencedColumnNames="ID" />
             </column>
         </createTable>
         
         <createTable tableName="GROUP_COMPONENT">
             <column name="GROUP_ID" type="BIGINT">
                 <constraints nullable="false"
-                    foreignKeyName="GROUP_COMPONENT_GROUPS_FK" referencedTableName="GROUPS"
-                    referencedColumnNames="ID" />
+                             foreignKeyName="GROUP_COMPONENT_GROUPS_FK" referencedTableName="GROUPS"
+                             referencedColumnNames="ID" />
             </column>
             <column name="COMPONENT_ID" type="BIGINT">
                 <constraints nullable="false"
-                    foreignKeyName="GROUP_COMPONENT_COMPONENTS_FK" referencedTableName="COMPONENTS"
-                    referencedColumnNames="ID" />
+                             foreignKeyName="GROUP_COMPONENT_COMPONENTS_FK" referencedTableName="COMPONENTS"
+                             referencedColumnNames="ID" />
             </column>           
             <column name="READ" type="BOOLEAN">
                 <constraints nullable="false"/>
@@ -213,11 +213,11 @@
         <createTable tableName="USERTEMPLATES">
             <column name="ID" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"
-                    primaryKeyName="UT_PK" />
+                             primaryKeyName="UT_PK" />
             </column>
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false" unique="true"
-                    uniqueConstraintName="UT_NAME_UNIQ" />
+                             uniqueConstraintName="UT_NAME_UNIQ" />
             </column>
             <column name="AUTOAUTHORIZE" type="BOOLEAN">
                 <constraints nullable="false" />
@@ -229,28 +229,64 @@
 
         <createTable tableName="USERTEMPLATE_ROLE">
             <column name="USERTEMPLATE_ID" type="BIGINT">
-                <constraints nullable="false"
-                    foreignKeyName="UT_ROLE_USERTEMPLATES_FK"
-                    referencedColumnNames="ID" referencedTableName="USERTEMPLATES" />
+                <constraints nullable="false" />
             </column>
             <column name="ROLE_ID" type="BIGINT">
                 <constraints nullable="false"
-                    foreignKeyName="UT_ROLE_ROLES_FK" referencedColumnNames="ID"
-                    referencedTableName="ROLES" />
+                             foreignKeyName="UT_ROLE_ROLES_FK" referencedColumnNames="ID"
+                             referencedTableName="ROLES" />
             </column>
         </createTable>
-
+        <addForeignKeyConstraint baseColumnNames="USERTEMPLATE_ID" 
+                                 baseTableName="USERTEMPLATE_ROLE"
+                                 constraintName="UT_ROLE_USERTEMPLATES_FK"
+                                 deferrable="false" initiallyDeferred="false"
+                                 onDelete="CASCADE" referencedColumnNames="ID"
+                                 referencedTableName="USERTEMPLATES"/>
         <createTable tableName="USERTEMPLATE_GROUP">
             <column name="USERTEMPLATE_ID" type="BIGINT">
-                <constraints nullable="false"
-                    foreignKeyName="UT_GROUP_USERTEMPLATES_FK"
-                    referencedColumnNames="ID" referencedTableName="USERTEMPLATES" />
+                <constraints nullable="false"/>
             </column>
             <column name="GROUP_ID" type="BIGINT">
                 <constraints nullable="false"
-                    foreignKeyName="UT_GROUP_GROUPS_FK" referencedColumnNames="ID"
-                    referencedTableName="GROUPS" />
+                             foreignKeyName="UT_GROUP_GROUPS_FK" referencedColumnNames="ID"
+                             referencedTableName="GROUPS" />
             </column>
         </createTable>
+        <addForeignKeyConstraint baseColumnNames="USERTEMPLATE_ID" 
+                                 baseTableName="USERTEMPLATE_GROUP"
+                                 constraintName="UT_GROUP_USERTEMPLATES_FK"
+                                 deferrable="false" initiallyDeferred="false"
+                                 onDelete="CASCADE" referencedColumnNames="ID"
+                                 referencedTableName="USERTEMPLATES"/>
+    </changeSet>
+    <changeSet id="8" author="arpost">
+        <insert tableName="ROLES">
+            <column name="ID" valueSequenceNext="ROLE_SEQ"/>
+            <column name="DEFAULTROLE" valueBoolean="false"/>
+            <column name="NAME" value="researcher"/>
+        </insert>
+        <rollback>
+            <delete tableName="ROLES">
+                <where>NAME='researcher'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+    <changeSet id="9" author="arpost">
+        <insert tableName="USERTEMPLATES">
+            <column name="ID" valueSequenceNext="UT_SEQ"/>
+            <column name="NAME" value="Auto Authorize"/>
+            <column name="AUTOAUTHORIZE" valueBoolean="true"/>
+            <column name="CRITERIA"/>
+        </insert>
+        <insert tableName="USERTEMPLATE_ROLE">
+            <column name="USERTEMPLATE_ID" valueSequenceCurrent="UT_SEQ"/>
+            <column name="ROLE_ID" valueComputed="(select id from roles where name='researcher')"/>
+        </insert>
+        <rollback>
+            <delete tableName="USERTEMPLATES">
+                <where>NAME='Auto Authorize'</where>
+            </delete>
+        </rollback>
     </changeSet>
 </databaseChangeLog>
