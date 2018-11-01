@@ -25,6 +25,7 @@ import com.google.inject.Module;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.GuiceServletContextListener;
 import org.eurekaclinical.common.config.InjectorSupport;
+import org.eurekaclinical.common.config.ServiceServletModuleWithAutoAuthorization;
 import org.eurekaclinical.registry.service.props.ServiceProperties;
 
 /**
@@ -38,7 +39,7 @@ import org.eurekaclinical.registry.service.props.ServiceProperties;
  */
 public class ContextListener extends GuiceServletContextListener {
     private static final String JPA_UNIT = "service-jpa-unit";
-    
+    private static final String PACKAGE_NAMES = "org.eurekaclinical.registry.service.resource";
     private final ServiceProperties properties;
     
     /**
@@ -59,7 +60,7 @@ public class ContextListener extends GuiceServletContextListener {
         return new InjectorSupport(
             new Module[]{
                 new AppModule(),
-                new ServletModule(this.properties),
+                new ServiceServletModuleWithAutoAuthorization(this.properties, PACKAGE_NAMES),
                 new JpaPersistModule(JPA_UNIT)
             },
             this.properties).getInjector();

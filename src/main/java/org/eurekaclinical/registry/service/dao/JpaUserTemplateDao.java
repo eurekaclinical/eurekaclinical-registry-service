@@ -26,10 +26,8 @@ import javax.inject.Provider;
 import javax.persistence.EntityManager;
 
 import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
-import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
 import org.eurekaclinical.standardapis.dao.AbstractJpaUserTemplateDao;
-import org.eurekaclinical.standardapis.entity.UserEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity_;
 
 /**
@@ -60,12 +58,4 @@ public class JpaUserTemplateDao extends AbstractJpaUserTemplateDao<AuthorizedRol
         }
     }
     
-    @Override
-    public UserEntity newUserEntityInstance(String username, List<AuthorizedRoleEntity> roles) {
-        AuthorizedUserEntity user = new AuthorizedUserEntity();
-        user.setUsername(username);
-        user.setRoles(roles);
-        return user;
-    }
-
 }
