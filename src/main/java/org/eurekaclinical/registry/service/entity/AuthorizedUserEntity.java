@@ -25,15 +25,14 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import org.eurekaclinical.standardapis.entity.UserEntity;
+import org.eurekaclinical.standardapis.entity.AbstractUserEntity;
 
 /**
  * Created by akalsan on 10/4/16.
  */
 @Entity
 @Table(name = "users")
-public class AuthorizedUserEntity implements UserEntity<AuthorizedRoleEntity> {
+public class AuthorizedUserEntity extends AbstractUserEntity<AuthorizedRoleEntity> {
 
     /**
      * The user's unique identifier.
@@ -144,15 +143,17 @@ public class AuthorizedUserEntity implements UserEntity<AuthorizedRoleEntity> {
         }
     }
 
+    @Override
     public void addRole(AuthorizedRoleEntity inRole) {
         if(!this.roles.contains(inRole))
         this.roles.add(inRole);
     }
 
+    @Override
     public void removeRole(AuthorizedRoleEntity inRole) {
         this.roles.remove(inRole);
     }
-
+    
     public void setGroups(final List<GroupEntity> inGroup) {
         if (inGroup == null) {
             this.groups = new ArrayList<>();

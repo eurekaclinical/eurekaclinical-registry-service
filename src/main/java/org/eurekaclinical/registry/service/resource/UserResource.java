@@ -44,7 +44,7 @@ public class UserResource extends AbstractUserResource<User, AuthorizedUserEntit
     private final RegistryServiceRoleDao roleDao;
 
     @Inject
-    public UserResource(UserDao<AuthorizedUserEntity> inUserDao, RegistryServiceRoleDao inRoleDao) {
+    public UserResource(UserDao<AuthorizedRoleEntity, AuthorizedUserEntity> inUserDao, RegistryServiceRoleDao inRoleDao) {
         super(inUserDao);
         this.roleDao = inRoleDao;
     }
