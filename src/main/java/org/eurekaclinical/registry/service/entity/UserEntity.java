@@ -150,6 +150,13 @@ public class UserEntity implements org.eurekaclinical.standardapis.entity.UserEn
         this.roles.remove(inRole);
     }
 
+    public void setGroups(final List<GroupEntity> inGroup) {
+        if (inGroup == null) {
+            this.groups = new ArrayList<>();
+        } else {
+            this.groups = new ArrayList<>(inGroup);
+        }
+    }
     
     public void addGroup(GroupEntity inGroup) {
         if(!this.groups.contains(inGroup))
