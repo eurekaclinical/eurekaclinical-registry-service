@@ -27,7 +27,6 @@
     <class>org.eurekaclinical.registry.service.entity.AuthorizedUserEntity</class>
     <class>org.eurekaclinical.registry.service.entity.ComponentEntity</class>
     <class>org.eurekaclinical.registry.service.entity.ComponentTypeEntity</class>
-    <class>org.eurekaclinical.registry.service.entity.UserTemplateEntity</class>
     <properties>
       <!-- Disable the second-level cache -->
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
