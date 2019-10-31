@@ -4,13 +4,13 @@
     <packaging>war</packaging>
     <groupId>org.eurekaclinical</groupId>
     <artifactId>eurekaclinical-registry-service</artifactId>
-    <version>1.2-Beta-4-SNAPSHOT</version>
+    <version>1.4-Alpha-3-SNAPSHOT</version>
     <inceptionYear>2017</inceptionYear>
     <name>Eureka! Clinical Registry Service</name>
     <parent>
         <groupId>org.eurekaclinical</groupId>
         <artifactId>eurekaclinical-parent-standard-deps</artifactId>
-        <version>3-Alpha-2</version>
+        <version>4-Alpha-3-SNAPSHOT</version>
     </parent>
     <url>https://github.com/eurekaclinical/eurekaclinical-registry-service.git</url>
 
@@ -27,10 +27,10 @@
     </issueManagement>
 
     <properties>
-        <eurekaclinical-common-version>2.0</eurekaclinical-common-version>
-        <eurekaclinical-standard-apis-version>2.0</eurekaclinical-standard-apis-version>
-        <eurekaclinical-registry-client-version>1.1-Beta-2</eurekaclinical-registry-client-version>
-        <cas-mock-version>2.0</cas-mock-version>
+        <eurekaclinical-common-version>5.0-Alpha-6-SNAPSHOT</eurekaclinical-common-version>
+        <eurekaclinical-standard-apis-version>4.0-Alpha-5-SNAPSHOT</eurekaclinical-standard-apis-version>
+        <eurekaclinical-registry-client-version>1.4-Beta-5-SNAPSHOT</eurekaclinical-registry-client-version>
+        <cas-mock-version>2.3-SNAPSHOT</cas-mock-version>
     </properties>
     <build>
         <plugins>
@@ -43,23 +43,6 @@
                         <param>etc/license-mappings.xml</param>
                     </licenseMapping>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>liquibase-populate-services-db</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>update</goal>
-                        </goals>
-                        <configuration>
-                            <changeLogFile>${project.build.directory}/classes/dbmigration/changelog-master.xml</changeLogFile>
-                            <url>jdbc:h2:file:${project.build.directory}/db/db</url>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -132,6 +115,23 @@
                                             <filtering>true</filtering>
                                         </resource>
                                     </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>liquibase-populate-services-db</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>update</goal>
+                                </goals>
+                                <configuration>
+                                    <changeLogFile>${project.build.directory}/classes/dbmigration/changelog-master.xml</changeLogFile>
+                                    <url>jdbc:h2:file:${project.build.directory}/db/db</url>
                                 </configuration>
                             </execution>
                         </executions>

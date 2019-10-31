@@ -29,6 +29,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.eurekaclinical.standardapis.entity.RoleEntity;
 /**
  * Created by akalsan on 10/4/16.
  */
@@ -36,7 +37,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "roles")
-public class RoleEntity implements org.eurekaclinical.standardapis.entity.RoleEntity {
+public class AuthorizedRoleEntity implements RoleEntity {
 
     @Id
     @SequenceGenerator(name = "ROLE_SEQ_GENERATOR", sequenceName = "ROLE_SEQ",
@@ -57,7 +58,7 @@ public class RoleEntity implements org.eurekaclinical.standardapis.entity.RoleEn
     /**
      * Create an empty role.
      */
-    public RoleEntity() {
+    public AuthorizedRoleEntity() {
     }
 
     /**
@@ -139,7 +140,7 @@ public class RoleEntity implements org.eurekaclinical.standardapis.entity.RoleEn
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final RoleEntity other = (RoleEntity) obj;
+        final AuthorizedRoleEntity other = (AuthorizedRoleEntity) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -148,7 +149,7 @@ public class RoleEntity implements org.eurekaclinical.standardapis.entity.RoleEn
 
     @Override
     public String toString() {
-        return "RoleEntity{" + "id=" + id + ", name=" + name + ", defaultRole=" + defaultRole + '}';
+        return "AuthorizedRoleEntity{" + "id=" + id + ", name=" + name + ", defaultRole=" + defaultRole + '}';
     }
 
 }

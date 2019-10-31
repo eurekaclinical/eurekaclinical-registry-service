@@ -26,12 +26,16 @@ import org.eurekaclinical.registry.service.dao.ComponentDao;
 import org.eurekaclinical.registry.service.dao.ComponentTypeDao;
 import org.eurekaclinical.registry.service.dao.JpaComponentDao;
 import org.eurekaclinical.registry.service.dao.JpaComponentTypeDao;
+import org.eurekaclinical.registry.service.dao.JpaGroupDao;
 import org.eurekaclinical.registry.service.dao.JpaRoleDao;
 import org.eurekaclinical.registry.service.dao.JpaUserDao;
+import org.eurekaclinical.registry.service.dao.RegistryServiceRoleDao;
 import org.eurekaclinical.registry.service.entity.ComponentEntity;
 import org.eurekaclinical.registry.service.entity.ComponentTypeEntity;
-import org.eurekaclinical.registry.service.entity.RoleEntity;
-import org.eurekaclinical.registry.service.entity.UserEntity;
+import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
+import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
+import org.eurekaclinical.registry.service.entity.GroupEntity;
+import org.eurekaclinical.standardapis.dao.GroupDao;
 import org.eurekaclinical.standardapis.dao.RoleDao;
 import org.eurekaclinical.standardapis.dao.UserDao;
 
@@ -42,10 +46,12 @@ public class AppModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(new TypeLiteral<UserDao<UserEntity>>() {}).to(JpaUserDao.class);
+        bind(RegistryServiceRoleDao.class).to(JpaRoleDao.class);
+        bind(new TypeLiteral<UserDao<AuthorizedUserEntity>>() {}).to(JpaUserDao.class);
         bind(new TypeLiteral<UserDao<? extends org.eurekaclinical.standardapis.entity.UserEntity<? extends org.eurekaclinical.standardapis.entity.RoleEntity>>>() {}).to(JpaUserDao.class);
-        bind(new TypeLiteral<RoleDao<RoleEntity>>() {}).to(JpaRoleDao.class);
+        bind(new TypeLiteral<RoleDao<AuthorizedRoleEntity>>() {}).to(JpaRoleDao.class);
         bind(new TypeLiteral<ComponentDao<ComponentEntity>>() {}).to(JpaComponentDao.class);
         bind(new TypeLiteral<ComponentTypeDao<ComponentTypeEntity>>() {}).to(JpaComponentTypeDao.class);
+        bind(new TypeLiteral<GroupDao<GroupEntity>>() {}).to(JpaGroupDao.class);
     }
 }
