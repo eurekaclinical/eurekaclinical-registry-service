@@ -4,7 +4,7 @@ package org.eurekaclinical.registry.service.dao;
  * #%L
  * Eureka! Clinical Registry Service
  * %%
- * Copyright (C) 2017 Emory University
+ * Copyright (C) 2017 - 2018 Emory University
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,23 @@ package org.eurekaclinical.registry.service.dao;
  * #L%
  */
 
-import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
-import org.eurekaclinical.standardapis.dao.AbstractJpaRoleDao;
+
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.persistence.EntityManager;
 
+
+import org.eurekaclinical.registry.service.entity.GroupEntity;
+import org.eurekaclinical.standardapis.dao.AbstractJpaGroupDao;
+
+
 /**
- * Created by akalsan on 10/4/16.
+ * 
+ *
+ * @author Dileep Gunda
  */
-
-
-public class JpaRoleDao extends AbstractJpaRoleDao<AuthorizedRoleEntity> implements RegistryServiceRoleDao{
+public class JpaGroupDao extends AbstractJpaGroupDao<GroupEntity> implements GroupDao {
 
     /**
      * Create an object with the give entity manager.
@@ -41,7 +45,9 @@ public class JpaRoleDao extends AbstractJpaRoleDao<AuthorizedRoleEntity> impleme
      * the data store.
      */
     @Inject
-    public JpaRoleDao(final Provider<EntityManager> inEMProvider) {
-        super(AuthorizedRoleEntity.class, inEMProvider);
+    public JpaGroupDao(final Provider<EntityManager> inEMProvider) {
+        super(GroupEntity.class, inEMProvider);
     }
+
+
 }

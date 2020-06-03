@@ -22,8 +22,8 @@ package org.eurekaclinical.registry.service.resource;
 
 import com.google.inject.persist.Transactional;
 import org.eurekaclinical.common.resource.AbstractRoleResource;
-import org.eurekaclinical.registry.service.entity.RoleEntity;
-import org.eurekaclinical.standardapis.dao.RoleDao;
+import org.eurekaclinical.registry.service.dao.RegistryServiceRoleDao;
+import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
 import org.eurekaclinical.common.comm.Role;
 
 import javax.inject.Inject;
@@ -35,15 +35,15 @@ import javax.ws.rs.Path;
  */
 @Path("/protected/roles")
 @Transactional
-public class RoleResource extends AbstractRoleResource<RoleEntity, Role> {
+public class RoleResource extends AbstractRoleResource<AuthorizedRoleEntity, Role> {
 
     @Inject
-    public RoleResource(RoleDao<RoleEntity> inRoleDao) {
+    public RoleResource(RegistryServiceRoleDao inRoleDao) {
         super(inRoleDao);
     }
 
     @Override
-    protected Role toComm(RoleEntity roleEntity, HttpServletRequest req) {
+    protected Role toComm(AuthorizedRoleEntity roleEntity, HttpServletRequest req) {
         Role role = new Role();
         role.setId(roleEntity.getId());
         role.setName(roleEntity.getName());
