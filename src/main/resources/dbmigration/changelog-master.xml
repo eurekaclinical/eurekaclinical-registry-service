@@ -152,7 +152,7 @@
             <column name="LARGEICON" type="VARCHAR(1024)"/>
         </addColumn>
     </changeSet>
-    <changeSet author="dileep" id="6">
+    <changeSet author="dileep" id="7">
     
         <createTable tableName="GROUPS">
             <column name="ID" type="BIGINT">
@@ -205,7 +205,24 @@
             <column name="EXECUTE" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
-        </createTable>
-        
+        </createTable>        
     </changeSet>
+ 	<changeSet author="nita" id="8">
+ 	    <insert tableName="USERS">
+            <column name="ID" valueSequenceNext="USER_SEQ"/>
+            <column name="USERNAME" value="actuser"/>
+        </insert>
+        <insert tableName="USER_ROLE">
+            <column name="USER_ID" valueComputed="(SELECT ID FROM USERS WHERE USERNAME='actuser')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT ID FROM ROLES WHERE NAME='admin')"/>
+        </insert>
+        <insert tableName="USERS">
+            <column name="ID" valueSequenceNext="USER_SEQ"/>
+            <column name="USERNAME" value="allofususer"/>
+        </insert>
+        <insert tableName="USER_ROLE">
+            <column name="USER_ID" valueComputed="(SELECT ID FROM USERS WHERE USERNAME='allofususer')"/>
+            <column name="ROLE_ID" valueComputed="(SELECT ID FROM ROLES WHERE NAME='admin')"/>
+        </insert>
+    </changeSet>  
 </databaseChangeLog>
